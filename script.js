@@ -1,31 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("formulario");
-  
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-  
-      const nome = document.getElementById("Name").value.trim();
-      const email = document.getElementById("Email").value.trim();
-      const idade = document.getElementById("Age").value.trim();
-  
-      if (!nome || !email || !idade) {
-        alert("Preencha todos os campos!");
-        return;
-      }
-  
-      const novoRegistro = { nome, email, idade };
-  
-      // Busca os registros existentes ou cria uma lista nova
-      const registros = JSON.parse(localStorage.getItem("registros")) || [];
-      registros.push(novoRegistro);
-  
-      // Salva no localStorage
-      localStorage.setItem("registros", JSON.stringify(registros));
-  
-      alert("Cadastro realizado com sucesso!");
-  
-      // Redireciona para a página de registros
-      window.location.href = "registros.html";
+  const apiUrl = "http://localhost:3000/registros";
+
+  const form = document.getElementById("formulario");
+  const inputId = document.getElementById("id"); // campo hidden
+  const inputNome = document.getElementById("nome");
+  const inputEmail = document.getElementById("email");
+  const inputIdade = document.getElementById("idade");
+
+  // 1. Verifica se tem id na URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const registroId = urlParams.get("id");
+
+  if (registroId) {
+    fetch(`${apiUrl}/${registroId}`)
+      .then((res) => res.json())
+      .then((registro) => {
+        inputId.value = registro.id;
+        inputNome.value = registro.nome;
+        inputEmail.value = registro.email;
+        inputIdade.value = registro.idade;
+      })
+      .catch((err) => console.error("Erro ao carregar para edição:", err));
+  }
+
+  // 2. Enviar novo ou editar
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const dados = {
+      nome: inputNome.value,
+      email: inputEmail.value,
+      idade: parseInt(inputIdade.value),
+    };
+
+    const id = inputId.value;
+
+    const url = id ? `${apiUrl}/${id}` : apiUrl;
+    const metodo = id ? "PUT" : "POST";
+
+    await fetch(url, {
+      method: metodo,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados),
     });
+
+    window.location.href = "registros.html";
   });
-  
+});
