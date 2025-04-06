@@ -1,32 +1,31 @@
-window.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("formulario");
-    const nome = document.getElementById("Name");
-    const email = document.getElementById("Email");
-    const idade = document.getElementById("Age");
-    const tabela = document.getElementById("tabela").querySelector("tbody");
   
     form.addEventListener("submit", (event) => {
       event.preventDefault();
   
-      const nomeValor = nome.value.trim();
-      const emailValor = email.value.trim();
-      const idadeValor = idade.value.trim();
+      const nome = document.getElementById("Name").value.trim();
+      const email = document.getElementById("Email").value.trim();
+      const idade = document.getElementById("Age").value.trim();
   
-      if (!nomeValor || !emailValor || !idadeValor) {
+      if (!nome || !email || !idade) {
         alert("Preencha todos os campos!");
         return;
       }
   
-      const novaLinha = document.createElement("tr");
+      const novoRegistro = { nome, email, idade };
   
-      novaLinha.innerHTML = `
-        <td>${nomeValor}</td>
-        <td>${emailValor}</td>
-        <td>${idadeValor}</td>
-      `;
+      // Busca os registros existentes ou cria uma lista nova
+      const registros = JSON.parse(localStorage.getItem("registros")) || [];
+      registros.push(novoRegistro);
   
-      tabela.appendChild(novaLinha);
-      form.reset();
+      // Salva no localStorage
+      localStorage.setItem("registros", JSON.stringify(registros));
+  
+      alert("Cadastro realizado com sucesso!");
+  
+      // Redireciona para a página de registros
+      window.location.href = "registros.html";
     });
   });
   
