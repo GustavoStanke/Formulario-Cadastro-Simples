@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#formulario {
+    height: 300px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px;
+    gap: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+}
+
+h2 {
+    margin-bottom: 12px;
+
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    color: white;
+
+}
+
+#topo {
+
+    width: 100%;
+    height: 60px;
+    background-color: rgb(59, 55, 55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#dentro {
+    display: flex;
+    flex-direction: column;
+}
+
+#fora {
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type='submit'] {
+    width: 45%;
+    margin-top: 5px;
+
+}
+
+input[type='reset'] {
+    width: 45%;
+    margin-top: 5px;
+
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 8px;
+    margin-bottom: 5px;
+
+}
+
+input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+table {
+    height: 100px;
+    width: 450px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: rgb(59, 55, 55);
+    color: white;
+    text-align: center;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="topo">
+        <ul>
+            <li>Cadastro</li>
+            <li>Exibir Dados</li>
+        </ul>
+    </div>
+
+    <form id="formulario">
+        <h2><strong>Formulário de cadastro</strong></h2>
+        <div id="dentro">
+
+            <label>Nome</label>
+            <input type="text" name="" id="Name">
+
+            <label for="text">E-mail </label>
+            <input type="text" name="" id="Email">
+
+            <label>Idade</label>
+            <input type="number" name="" id="Age">
+
+        </div>
+        <div id="fora">
+            <input type="submit" name="" id="btnCadastrar" value="Cadastrar">
+            <input type="reset" name="" id="btn" value="Limpar">
+        </div>
+    </form>
+    <div>
+
+        <table id="tabela"> 
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Idade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados vão ser adicionados aqui via JS -->
+            </tbody>
+        </table>
+        
+    </div>
+        
+    <script src="script.js"></script>
+</body>
+
+</html>

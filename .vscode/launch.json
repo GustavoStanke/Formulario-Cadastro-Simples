@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "pwa-msedge", 
+        "request": "launch",
+        "name": "Abrir com Opera GX",
+        "runtimeExecutable": "C:\\Users\\luizs\\AppData\\Local\\Programs\\Opera GX\\opera.exe",
+        "file": "c:\\Users\\luizs\\Downloads\\Exemplo\\index.html"
+      }
+    ]
+  }
+  
