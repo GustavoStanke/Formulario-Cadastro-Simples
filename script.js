@@ -2,48 +2,64 @@ document.addEventListener("DOMContentLoaded", () => {
   const apiUrl = "http://localhost:3000/registros";
 
   const form = document.getElementById("formulario");
-  const inputId = document.getElementById("id"); // campo hidden
-  const inputNome = document.getElementById("nome");
-  const inputEmail = document.getElementById("email");
-  const inputIdade = document.getElementById("idade");
+  const inputNome = document.getElementById("Name");
+  const inputEmail = document.getElementById("Email");
+  const inputIdade = document.getElementById("Age");
 
-  // 1. Verifica se tem id na URL
+  // Verifica se há um ID na URL (modo edição)
   const urlParams = new URLSearchParams(window.location.search);
   const registroId = urlParams.get("id");
 
+  // Se tiver ID, busca os dados para preencher o formulário
   if (registroId) {
     fetch(`${apiUrl}/${registroId}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Registro não encontrado.");
+        return res.json();
+      })
       .then((registro) => {
-        inputId.value = registro.id;
         inputNome.value = registro.nome;
         inputEmail.value = registro.email;
         inputIdade.value = registro.idade;
       })
-      .catch((err) => console.error("Erro ao carregar para edição:", err));
+      .catch((err) => {
+        console.error("Erro ao carregar registro:", err);
+        alert("Erro ao carregar os dados para edição.");
+      });
   }
 
-  // 2. Enviar novo ou editar
+  // Ao enviar o formulário
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const dados = {
-      nome: inputNome.value,
-      email: inputEmail.value,
-      idade: parseInt(inputIdade.value),
+      nome: inputNome.value.trim(),
+      email: inputEmail.value.trim(),
+      idade: Number(inputIdade.value),
     };
 
-    const id = inputId.value;
+    if (!dados.nome || !dados.email || isNaN(dados.idade)) {
+      alert("Preencha todos os campos corretamente.");
+      return;
+    }
 
-    const url = id ? `${apiUrl}/${id}` : apiUrl;
-    const metodo = id ? "PUT" : "POST";
+    const url = registroId ? `${apiUrl}/${registroId}` : apiUrl;
+    const metodo = registroId ? "PUT" : "POST";
 
-    await fetch(url, {
-      method: metodo,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dados),
-    });
+    try {
+      const resposta = await fetch(url, {
+        method: metodo,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados),
+      });
 
-    window.location.href = "registros.html";
+      if (!resposta.ok) throw new Error("Erro ao salvar.");
+
+      alert(registroId ? "Registro atualizado com sucesso!" : "Registro cadastrado com sucesso!");
+      window.location.href = "registros.html"; // redireciona após salvar
+    } catch (erro) {
+      console.error("Erro:", erro);
+      alert("Falha ao salvar o registro.");
+    }
   });
 });

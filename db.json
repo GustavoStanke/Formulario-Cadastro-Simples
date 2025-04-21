@@ -1,3 +1,28 @@
 {
-  "registros": []
+  "registros": [
+    {
+      "id": 1,
+      "nome": "João",
+      "email": "joao@email.com",
+      "idade": 25
+    },
+    {
+      "nome": "LUIZ GUSTAVO LOPES STANKE",
+      "email": "luiz.stanke121@gmail.com",
+      "idade": 18,
+      "id": "2fc6598f-31f6-4b75-97c6-a12530986ab9"
+    },
+    {
+      "id": "a2ec",
+      "nome": "LUIZ GUSTAVO LOPES STANKE",
+      "email": "luiz.stanke121@gmail.com",
+      "idade": 12313
+    },
+    {
+      "nome": "LUIZ GUSTAVO LOPES STANKE",
+      "email": "luiz.stanke121@gmail.com",
+      "idade": 12321,
+      "id": "0a8e"
+    }
+  ]
 }
